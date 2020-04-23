@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ToDo from './ToDo'
 import ToDoForm from './ToDoForm'
+import "./TodoList.css"
 
 export default class TodoList extends Component {
     constructor(props) {
@@ -46,7 +47,7 @@ toogleCompletion(id) {
     render() {
         console.log(this.state.todos)
         let toDos = this.state.todos
-        let taskList = toDos.map(e=> <li><ToDo 
+        let taskList = toDos.map(e => < li > <ToDo ToDo classNames = 'todo'
         deleteTask={this.delete} 
         key={e.id}
         id={e.id}
@@ -56,10 +57,10 @@ toogleCompletion(id) {
         task={e.task}>
         </ToDo></li>)
         return (
-            <div>
-                <h1>To Do List!</h1>
+            <div className="TodoList">
+                <h1>To Do List! Get To Work! <span>An Animated Todo List Made With React Hooks.</span></h1>
                 <ul>{taskList}</ul>
-                <ToDoForm createToDo={this.create}></ToDoForm>
+                <ToDoForm className='todo-list' createToDo={this.create}></ToDoForm>
 
             </div>
         )
