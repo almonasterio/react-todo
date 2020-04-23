@@ -15,7 +15,7 @@ handleChange(e) {
 }
 handleSubmit(e) {
     e.preventDefault();
-    this.props.createToDo({...this.state, id: uuid()});
+    this.props.createToDo({...this.state, id: uuid(), completed:false});
     this.setState({task: ""})
     
 }

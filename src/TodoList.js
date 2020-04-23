@@ -8,7 +8,8 @@ export default class TodoList extends Component {
         this.state = { todos: [] };
         this.create=this.create.bind(this);
         this.delete=this.delete.bind(this);
-        this.updateTask=this.updateTask.bind(this)
+        this.updateTask=this.updateTask.bind(this);
+        this.toogleCompletion=this.toogleCompletion.bind(this)
     }
     create(newToDo) {
         console.log(newToDo)
@@ -23,13 +24,24 @@ export default class TodoList extends Component {
         })
     }
     updateTask(editedTask, id) {
-        const updatedToDo
-        // this.setState({
-        //     todos: [...this.state.todos.map(t => t.id==id? (return t.task=editedTask) : null )]
-        // })
+        const updatedToDo = [...this.state.todos.map(todo => {
+            if (todo.id==id) {
+               return {...todo, task: editedTask}
+            } return todo; })]
+        this.setState({
+            todos: updatedToDo
+        })
 
     }
-
+toogleCompletion(id) {
+ const completedToDo = [...this.state.todos.map(eTask => {
+            if (eTask.id==id) {
+               return {...eTask, completed:!eTask.completed}
+            } return eTask; })]
+        this.setState({
+            todos: completedToDo
+        })
+}
 
     render() {
         console.log(this.state.todos)
@@ -38,6 +50,8 @@ export default class TodoList extends Component {
         deleteTask={this.delete} 
         key={e.id}
         id={e.id}
+        toogleCompletion={this.toogleCompletion}
+        completed={e.completed}
         updateTask={this.updateTask}
         task={e.task}>
         </ToDo></li>)

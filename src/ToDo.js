@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import "./ToDo.css"
 
 export default class ToDo extends Component {
     constructor(props){
@@ -10,7 +11,8 @@ export default class ToDo extends Component {
         this.handleDelete = this.handleDelete.bind(this)
         this.toogleForm=this.toogleForm.bind(this)
         this.handleChange=this.handleChange.bind(this)    
-         this.handleUpdate=this.handleUpdate.bind(this)    
+        this.handleUpdate=this.handleUpdate.bind(this)    
+        this.handleToogle=this.handleToogle.bind(this)
     }
 
  
@@ -34,6 +36,11 @@ handleUpdate(e){
     this.toogleForm();
     this.props.updateTask(this.state.task,this.props.id)
 }
+
+handleToogle(){
+    this.props.toogleCompletion(this.props.id)
+}
+
     render() {
         let result;
         if (this.state.isEditing) {
@@ -46,7 +53,7 @@ handleUpdate(e){
                     value={this.state.task}
                     name="task"
                     ></input>
-                    <button>Submit</button>
+                    <button>Save</button>
                 </form>
             </div>
             )
@@ -55,7 +62,7 @@ handleUpdate(e){
             <div>
             <button onClick={this.toogleForm}>Edit</button>
             <button onClick={this.handleDelete}>X</button>
-            <li>{this.props.task}</li>
+            <li className={this.props.completed? "completed" : "" } onClick={this.handleToogle}>{this.props.task}</li>
             </div>
             )
         }
